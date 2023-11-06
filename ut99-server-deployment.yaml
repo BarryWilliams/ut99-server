@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ut99-server
+  name: ut99-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ut99-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/ut99-server-default: "true"
+        io.kompose.service: ut99-server
+    spec:
+      containers:
+        - env:
+            - name: UT_ADMINEMAIL
+              value: '"no@one.com"'
+            - name: UT_ADMINNAME
+              value: '"UTAdmin"'
+            - name: UT_ADMINPWD
+              value: '"admin"'
+            - name: UT_INITIALBOTS_CTF
+              value: "8"
+            - name: UT_INITIALBOTS_DM
+              value: "4"
+            - name: UT_MINPLAYERS_CTF
+              value: "8"
+            - name: UT_MINPLAYERS_DM
+              value: "4"
+            - name: UT_MOTD1
+              value: '"Have Fun"'
+            - name: UT_SERVERNAME
+              value: '"My UT Server"'
+            - name: UT_SERVERURL
+              value: '"CTF-Face?game=BotPack.CTFGame?mutator=BotPack.InstaGibDM,MVES.MapVote,FlagAnnouncementsV2.FlagAnnouncements"'
+            - name: UT_WEBADMINPWD
+              value: '"admin"'
+            - name: UT_WEBADMINUSER
+              value: '"admin"'
+          image: roemer/ut99-server:latest
+          name: ut99-server
+          ports:
+            - containerPort: 5580
+              hostPort: 5580
+              protocol: TCP
+            - containerPort: 7777
+              hostPort: 7777
+              protocol: UDP
+            - containerPort: 7778
+              hostPort: 7778
+              protocol: UDP
+            - containerPort: 7779
+              hostPort: 7779
+              protocol: UDP
+            - containerPort: 7780
+              hostPort: 7780
+              protocol: UDP
+            - containerPort: 7781
+              hostPort: 7781
+              protocol: UDP
+            - containerPort: 8777
+              hostPort: 8777
+              protocol: UDP
+            - containerPort: 27500
+              hostPort: 27500
+              protocol: TCP
+            - containerPort: 27500
+              hostPort: 27500
+              protocol: UDP
+            - containerPort: 27900
+              hostPort: 27900
+              protocol: TCP
+            - containerPort: 27900
+              hostPort: 27900
+              protocol: UDP
+          resources: {}
+          volumeMounts:
+            - mountPath: /ut-data
+              name: ut99-data
+      restartPolicy: Always
+      volumes:
+        - name: ut99-data
+          persistentVolumeClaim:
+            claimName: ut99-data
+status: {}

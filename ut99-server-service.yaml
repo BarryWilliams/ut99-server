@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ut99-server
+  name: ut99-server
+spec:
+  ports:
+    - name: "5580"
+      port: 5580
+      targetPort: 5580
+    - name: "7777"
+      port: 7777
+      protocol: UDP
+      targetPort: 7777
+    - name: "7778"
+      port: 7778
+      protocol: UDP
+      targetPort: 7778
+    - name: "7779"
+      port: 7779
+      protocol: UDP
+      targetPort: 7779
+    - name: "7780"
+      port: 7780
+      protocol: UDP
+      targetPort: 7780
+    - name: "7781"
+      port: 7781
+      protocol: UDP
+      targetPort: 7781
+    - name: "8777"
+      port: 8777
+      protocol: UDP
+      targetPort: 8777
+    - name: "27500"
+      port: 27500
+      targetPort: 27500
+    - name: 27500-udp
+      port: 27500
+      protocol: UDP
+      targetPort: 27500
+    - name: "27900"
+      port: 27900
+      targetPort: 27900
+    - name: 27900-udp
+      port: 27900
+      protocol: UDP
+      targetPort: 27900
+  selector:
+    io.kompose.service: ut99-server
+status:
+  loadBalancer: {}
