@@ -33,7 +33,8 @@ spec:
           - --update
           - --times
           - --ignore-existing 
-          - /ut-data /pv-ut-data
+          - /ut-data/
+          - /pv-ut-data/
           volumeMounts:
             - mountPath: /pv-ut-data
               name: ut99-data
@@ -102,10 +103,10 @@ spec:
           resources:
             requests:
               cpu: 200m
-              memory: 256MiB
+              memory: 256Mi
             limits:
               cpu: 1000m
-              memory: 256MiB
+              memory: 256Mi
           volumeMounts:
             - mountPath: /ut-data
               name: ut99-data
