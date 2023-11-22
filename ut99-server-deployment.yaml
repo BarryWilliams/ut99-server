@@ -23,6 +23,20 @@ spec:
         io.kompose.network/ut99-server-default: "true"
         io.kompose.service: ut99-server
     spec:
+      initContainers:
+        - name: ensure-pv-gamedata-copy
+          image: barrywilliams/ut99-server:latest
+          command: 
+          - rsync
+          args:
+          - --recursive
+          - --update
+          - --times
+          - --ignore-existing 
+          - /ut-data /pv-ut-data
+          volumeMounts:
+            - mountPath: /pv-ut-data
+              name: ut99-data
       containers:
         - env:
             - name: UT_ADMINEMAIL
