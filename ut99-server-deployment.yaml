@@ -4,7 +4,6 @@ metadata:
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.31.2 (a92241f79)
-  creationTimestamp: null
   labels:
     io.kompose.service: ut99-server
   name: ut99-server
@@ -20,7 +19,6 @@ spec:
       annotations:
         kompose.cmd: kompose convert
         kompose.version: 1.31.2 (a92241f79)
-      creationTimestamp: null
       labels:
         io.kompose.network/ut99-server-default: "true"
         io.kompose.service: ut99-server
@@ -87,7 +85,13 @@ spec:
             - containerPort: 27900
               hostPort: 27900
               protocol: UDP
-          resources: {}
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256MiB
+            limits:
+              cpu: 1000m
+              memory: 256MiB
           volumeMounts:
             - mountPath: /ut-data
               name: ut99-data
@@ -96,4 +100,3 @@ spec:
         - name: ut99-data
           persistentVolumeClaim:
             claimName: ut99-data
-status: {}

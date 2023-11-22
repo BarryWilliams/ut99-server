@@ -4,11 +4,11 @@ metadata:
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.31.2 (a92241f79)
-  creationTimestamp: null
   labels:
     io.kompose.service: ut99-server
   name: ut99-server
 spec:
+  type: LoadBalancer
   ports:
     - name: "5580"
       port: 5580
@@ -53,5 +53,3 @@ spec:
       targetPort: 27900
   selector:
     io.kompose.service: ut99-server
-status:
-  loadBalancer: {}
