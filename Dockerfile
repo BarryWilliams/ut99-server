@@ -3,7 +3,7 @@ FROM amd64/ubuntu:latest
 # Prepare the system
 RUN dpkg --add-architecture i386 \
     && apt update \
-    && apt install -y nano curl wget python3 jq libx11-6:i386 \
+    && apt install -y nano vim rsync curl wget python3 jq libx11-6:i386 \
     && rm -rf /var/lib/apt/lists/*
 
 # Original Server v436
