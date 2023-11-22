@@ -1,5 +1,11 @@
 FROM amd64/ubuntu:latest
 
+# Prepare the system
+RUN dpkg --add-architecture i386 \
+    && apt update \
+    && apt install -y nano curl wget python3 jq libx11-6:i386 \
+    && rm -rf /var/lib/apt/lists/*
+
 # Original Server v436
 ADD files/ut-server-linux-436.tar.gz /
 # Update to 469c
@@ -23,12 +29,6 @@ ADD files/Scripts/ /
 
 # Environment variables
 ENV UT_SERVERURL="CTF-Face?game=BotPack.CTFGame?mutator=BotPack.InstaGibDM,MVES.MapVote,FlagAnnouncementsV2.FlagAnnouncements"
-
-# Prepare the system
-RUN dpkg --add-architecture i386 \
-    && apt update \
-    && apt install -y nano curl wget python3 jq libx11-6:i386 \
-    && rm -rf /var/lib/apt/lists/*
 
 # Create a link of this file to the missing file
 RUN ln -s /ut-server/System/libSDL-1.1.so.0 /ut-server/System/libSDL-1.2.so.0
