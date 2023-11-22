@@ -32,7 +32,8 @@ spec:
           - --recursive
           - --update
           - --times
-          - --ignore-existing 
+          - --ignore-existing
+          - --out-format="%B %l %M %f" 
           - /ut-data/
           - /pv-ut-data/
           volumeMounts:
